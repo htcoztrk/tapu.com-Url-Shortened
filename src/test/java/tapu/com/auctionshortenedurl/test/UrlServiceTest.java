@@ -40,29 +40,32 @@ class UrlServiceTest {
 		urlService = new UrlService(urlRepository, dozerMapper, userService);
 	}
 
-	/*
-	 * @Test void
-	 * createUrlCalledWithValidRequest_itShoultReturnValidUrlResponseDto() {
-	 * 
-	 * User user=new User(); user.setId(1); user.setPassword("1245");
-	 * user.setUsername("username");
-	 * 
-	 * Url url=new Url(); url.setId(1); url.setLongUrl("something");
-	 * url.setShortenedUrl(urlService.generateRandom()); url.setUser(user);
-	 * 
-	 * UrlResponseDto responseDto=new UrlResponseDto(); responseDto.setId(1);
-	 * responseDto.setShortenedUrl("shorted");
-	 * Mockito.when(userService.getById(1)).thenReturn(user);
-	 * //Mockito.when(dozerMapper.map(urlRequestDto, Url.class)).thenReturn(url);
-	 * Mockito.when(urlRepository.save(url)).thenReturn(url);
-	 * Mockito.when(dozerMapper.map(url,
-	 * UrlResponseDto.class)).thenReturn(responseDto);
-	 * 
-	 * UrlResponseDto result=urlService.create(1, "something");
-	 * assertEquals(result,responseDto);
-	 * 
-	 * }
-	 */
+	
+	  @Test void
+	  createUrlCalledWithValidRequest_itShoultReturnValidUrlResponseDto() {
+	  
+	  User user=new User(); user.setId(1); user.setPassword("1245");
+	  user.setUsername("username");
+	  
+	  Url url=new Url(); url.setId(1); url.setLongUrl("something");
+	  url.setShortenedUrl(urlService.generateRandom()); url.setUser(user);
+	  
+	  UrlResponseDto responseDto=new UrlResponseDto(); responseDto.setId(1);
+	  responseDto.setShortenedUrl("shorted");
+	  Mockito.when(userService.getById(1)).thenReturn(user);
+	  //Mockito.when(dozerMapper.map(urlRequestDto, Url.class)).thenReturn(url);
+	  Mockito.when(urlRepository.save(url)).thenReturn(url);
+	  Mockito.when(dozerMapper.map(url,
+	  UrlResponseDto.class)).thenReturn(responseDto);
+	  
+	  UrlResponseDto result=urlService.create(1, "something");
+	  assertEquals(result,responseDto);
+	  
+	  }
+	 
+	
+
+	
 	@Test
 	void testGetUrlByUserId_whenUserIdExistReturnUrls() {
 		User user = new User();

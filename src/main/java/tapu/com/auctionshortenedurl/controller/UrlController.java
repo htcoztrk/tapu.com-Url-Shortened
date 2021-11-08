@@ -62,7 +62,7 @@ public class UrlController {
 		return ResponseEntity.ok(urlService.getUrlsByUserId(id));
 	}
 
-	@PostMapping(value = "/deneme/user/{id}/url/create")
+	@PostMapping(value = "/user/{id}/url/create")
 	public ResponseEntity<?> create(@Valid @PathVariable("id") int id, @RequestParam String longUrl) {
 		return ResponseEntity.ok(urlService.create(id, longUrl));
 	}
