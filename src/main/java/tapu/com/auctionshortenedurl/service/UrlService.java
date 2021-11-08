@@ -1,10 +1,13 @@
 package tapu.com.auctionshortenedurl.service;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import com.github.dozermapper.core.Mapper;
@@ -13,9 +16,9 @@ import tapu.com.auctionshortenedurl.entities.Url;
 import tapu.com.auctionshortenedurl.entities.User;
 import tapu.com.auctionshortenedurl.entities.dto.UrlRequestDto;
 import tapu.com.auctionshortenedurl.entities.dto.UrlResponseDto;
-import tapu.com.auctionshortenedurl.exception.AlreadyExist;
-import tapu.com.auctionshortenedurl.exception.NotFoundException;
 import tapu.com.auctionshortenedurl.repository.UrlRepository;
+import tapu.com.auctionshortenedurl.util.exception.AlreadyExist;
+import tapu.com.auctionshortenedurl.util.exception.NotFoundException;
 
 @Service
 public class UrlService {
@@ -33,7 +36,7 @@ public class UrlService {
 
 	public UrlResponseDto create(int userId, String longUrl) {
 
-		User user = dozerMapper.map(userService.getById(userId), User.class);
+		User user = userService.getById(userId);
 		Url url = new Url();
 		url.setUser(user);
 		url.setLongUrl(longUrl);
@@ -45,11 +48,12 @@ public class UrlService {
 	}
 
 	public UrlResponseDto update(UrlRequestDto requestDto ) {
-		
-		Optional<Url> result = urlRepository.findById(requestDto.getId());
-		if (result.isPresent()) {
-			result.get().setLongUrl(requestDto.getLongUrl());
-			urlRepository.save(result.get());
+		Url result=urlRepository.getById(requestDto.getId());
+		//Url result =dozerMapper.map(requestDto, Url.class);
+		if (result!=null) {
+			result.setLongUrl(requestDto.getLongUrl());
+			urlRepository.save(result);
+			return dozerMapper.map(result, UrlResponseDto.class);
 		}
 		throw new NotFoundException("There is no such Url in our system!!");
 	}
@@ -79,6 +83,14 @@ public class UrlService {
 	public List<Url> getUrlsByUserId(int id){
 		return urlRepository.getByUser_Id(id);
 	}
+	public String redirectToLongUrl(String shortenedUrl) { 
+			Optional<Url> url=urlRepository.getByShortenedUrl(shortenedUrl);
+			
+			if(url.isPresent()) {
+				return url.get().getLongUrl();
+			}
+		 throw new NotFoundException("there is no such url");
+	}
 	public boolean CheckIfShortenedUrlExist(String shortenedUrl) {
 		Optional<Url> url = urlRepository.getByShortenedUrl(shortenedUrl);
 		if (url.isPresent()) {
@@ -87,6 +99,7 @@ public class UrlService {
 		return false;
 	}
 
+	
 	public String generateRandom() {
 		// create a string of uppercase and lowercase characters and numbers
 		String upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

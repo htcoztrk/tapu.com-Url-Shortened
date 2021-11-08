@@ -1,4 +1,4 @@
-package tapu.com.auctionshortenedurl.exception;
+package tapu.com.auctionshortenedurl.util.exception;
 
 public class NotFoundException extends RuntimeException{
 

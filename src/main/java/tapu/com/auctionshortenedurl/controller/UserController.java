@@ -1,4 +1,6 @@
-package tapu.com.auctionshortenedurl.api;
+package tapu.com.auctionshortenedurl.controller;
+
+import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +28,7 @@ public class UserController {
 		
 	}
 	@PostMapping(value="/signup")
-	public ResponseEntity<?> add(UserRequestDto user) {
+	public ResponseEntity<?> add(@Valid UserRequestDto user) {
 		return ResponseEntity.ok(userService.add(user));
 	}
 	@GetMapping(value="/getall")

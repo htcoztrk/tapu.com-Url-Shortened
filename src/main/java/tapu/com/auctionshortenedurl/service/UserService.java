@@ -13,8 +13,8 @@ import com.github.dozermapper.core.Mapper;
 import tapu.com.auctionshortenedurl.entities.User;
 import tapu.com.auctionshortenedurl.entities.dto.UserRequestDto;
 import tapu.com.auctionshortenedurl.entities.dto.UserResponseDto;
-import tapu.com.auctionshortenedurl.exception.NotFoundException;
 import tapu.com.auctionshortenedurl.repository.UserRepository;
+import tapu.com.auctionshortenedurl.util.exception.NotFoundException;
 
 @Service
 public class UserService {

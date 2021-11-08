@@ -2,6 +2,7 @@ package tapu.com.auctionshortenedurl.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
@@ -26,5 +27,10 @@ public class AppConfig {
           .select()                                  
           .apis(RequestHandlerSelectors.basePackage("tapu.com.auctionshortenedurl"))                                       
           .build();                                           
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }

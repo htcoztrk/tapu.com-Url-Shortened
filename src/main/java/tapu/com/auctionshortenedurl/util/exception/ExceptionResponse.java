@@ -1,4 +1,4 @@
-package tapu.com.auctionshortenedurl.util;
+package tapu.com.auctionshortenedurl.util.exception;
 
 import java.time.LocalDateTime;
 

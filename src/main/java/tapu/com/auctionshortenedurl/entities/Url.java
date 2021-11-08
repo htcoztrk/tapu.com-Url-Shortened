@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -26,7 +27,7 @@ public class Url {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
+	@NotNull(message="url can not be empty")
 	@Column(name="long_url")
 	private String longUrl;
 	
