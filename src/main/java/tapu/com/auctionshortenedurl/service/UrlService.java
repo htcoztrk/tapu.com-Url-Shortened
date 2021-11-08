@@ -16,6 +16,7 @@ import tapu.com.auctionshortenedurl.entities.Url;
 import tapu.com.auctionshortenedurl.entities.User;
 import tapu.com.auctionshortenedurl.entities.dto.UrlRequestDto;
 import tapu.com.auctionshortenedurl.entities.dto.UrlResponseDto;
+import tapu.com.auctionshortenedurl.entities.dto.UserResponseDto;
 import tapu.com.auctionshortenedurl.repository.UrlRepository;
 import tapu.com.auctionshortenedurl.util.exception.AlreadyExist;
 import tapu.com.auctionshortenedurl.util.exception.NotFoundException;
@@ -36,7 +37,7 @@ public class UrlService {
 
 	public UrlResponseDto create(int userId, String longUrl) {
 
-		User user = userService.getById(userId);
+		User user =userService.getById(userId) ;
 		Url url = new Url();
 		url.setUser(user);
 		url.setLongUrl(longUrl);

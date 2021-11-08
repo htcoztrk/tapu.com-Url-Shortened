@@ -35,28 +35,22 @@ public class UserService {
 
 	}
 
-	/*public List<UserResponseDto> getAll(){
-		List<UserResponseDto> responseDto=new ArrayList<UserResponseDto>();
+	public List<UserResponseDto> getAll(){
+		List<UserResponseDto> response=new ArrayList<UserResponseDto>();
 		userRepository.findAll().forEach(user->{
-			responseDto.add(dozerMapper.map(user, UserResponseDto.class));
-		});
-		return responseDto;
-	}*/
-	public List<User> getAll(){
-		List<User> response=new ArrayList<User>();
-		userRepository.findAll().forEach(user->{
-			response.add(user);
+			response.add(dozerMapper.map(user, UserResponseDto.class));
 		});
 		return response;
 	}
 
 	public User getById(int id) {
-		User user =new User();
-				user=userRepository.findById(id).get();
+		Optional<User> user =userRepository.findById(id);
+		if(user.isPresent()) {
+			return user.get();
+		}
+			
 		
-			return  user;
-		
-		//throw new NotFoundException("There is no such id in our system!!");
+		throw new NotFoundException("There is no such id in our system!!");
 	}
 
 }
