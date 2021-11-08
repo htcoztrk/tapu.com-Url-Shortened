@@ -9,8 +9,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="url")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","user"})
 public class Url {
 
 	@Id
@@ -28,26 +37,5 @@ public class Url {
 	@JoinColumn(name="user_id")
 	User user;
 	
-	public Url() {
-		
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getLongUrl() {
-		return longUrl;
-	}
-	public void setLongUrl(String longUrl) {
-		this.longUrl = longUrl;
-	}
-	public String getShortenedUrl() {
-		return shortenedUrl;
-	}
-	public void setShortenedUrl(String shortenedUrl) {
-		this.shortenedUrl = shortenedUrl;
-	}
-
+	
 }

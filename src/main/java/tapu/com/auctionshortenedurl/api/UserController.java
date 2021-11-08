@@ -29,10 +29,17 @@ public class UserController {
 	public ResponseEntity<?> add(UserRequestDto user) {
 		return ResponseEntity.ok(userService.add(user));
 	}
-	@PostMapping(value="/{id}/url/create")
-	public ResponseEntity<?> createUrl(@PathVariable int id,@RequestParam String url) {
-		
-		return ResponseEntity.ok(urlService.add(null));
+	@GetMapping(value="/getall")
+	public ResponseEntity<?> getAll(){
+		return ResponseEntity.ok(userService.getAll());
 	}
+	@GetMapping(value="/getbyid/{id}")
+	public ResponseEntity<?> getAll(@PathVariable int id){
+		return ResponseEntity.ok(userService.getById(id));
+	}
+	/*@PostMapping(value="/{id}/url/create")
+	public ResponseEntity<?> createUrl(@PathVariable("id") int id,@RequestParam("url") String url) {	
+		return ResponseEntity.ok(urlService.getById(id));
+	}*/
 	
 }
